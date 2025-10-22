@@ -1,0 +1,9 @@
+# Data
+data/
+figs/
+results/
+results.old/
+
+# python
+__pycache__
+.mypy_cache

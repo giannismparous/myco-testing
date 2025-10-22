@@ -1,0 +1,3 @@
+[submodule "data-clean"]
+	path = data-clean
+	url = git@github.com:ucsc-anonymity/data-clean.git

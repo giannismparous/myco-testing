@@ -1,0 +1,70 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+*.csv
+*.txt
+
+# Certificates (generated at runtime)
+certs/
+
+# Python (for sparta data processing)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Data files (keep structure but ignore large datasets)
+sparta-data/*.csv
+sparta-model-evaluation-main/data/**/*.pst
+
+# Keep the cleaned Enron dataset that myco needs
+!sparta-model-evaluation-main/data/enron/clean.csv
+!sparta-model-evaluation-main/data/enron/users.csv
+
+# Build artifacts
+*.o
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+
+# Test outputs
+test_results/
+benchmark_results/
+
+# Documentation build
+docs/_build/
+
+# Node modules (if any)
+node_modules/
+
+# Backup files
+*.bak
+*.backup
