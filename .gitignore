@@ -42,6 +42,8 @@ sparta-model-evaluation-main/data/**/*.pst
 # Keep the cleaned Enron dataset that myco needs
 !sparta-model-evaluation-main/data/enron/clean.csv
 !sparta-model-evaluation-main/data/enron/users.csv
+!sparta-model-evaluation-main/data/enron/
+!sparta-model-evaluation-main/data/
 
 # Build artifacts
 *.o
