@@ -35,9 +35,6 @@ ENV/
 env.bak/
 venv.bak/
 
-# Data files (keep structure but ignore large datasets)
-sparta-data/*.csv
-sparta-model-evaluation-main/data/**/*.pst
 
 # Keep the cleaned Enron dataset that myco needs
 !sparta-model-evaluation-main/data/enron/clean.csv
