@@ -86,12 +86,16 @@ async fn main() -> Result<(), Box<dyn Error>> {
         println!("\nWarm-up iteration {}/{}", iteration + 1, WARMUP_COUNT);
         
         simulation_client.s1.batch_init().await?;
-        // OLD CODE: Synthetic message
+        // MYCO VERSION: Synthetic message
         // let message = vec![1u8; MESSAGE_SIZE];
-        // NEW CODE: Real Enron message content (padded to MESSAGE_SIZE)
+        // simulation_client.async_write(&message, &client_name).await?;
+        
+        // ENRON VERSION: Real Enron message content (padded to MESSAGE_SIZE)
         let mut message = format!("Enron test message from {} at iteration {}", client_name, iteration).into_bytes();
         message.resize(MESSAGE_SIZE, 0); // Pad to MESSAGE_SIZE
-        simulation_client.async_write(&message, &client_name).await?;
+        // Send to first contact instead of self
+        let recipient = if contact_list.is_empty() { &client_name } else { &contact_list[0] };
+        simulation_client.async_write(&message, recipient).await?;
         simulation_client.s1.batch_write().await?;
         let messages = simulation_client.async_read(Some(1)).await?;
         
@@ -111,12 +115,16 @@ async fn main() -> Result<(), Box<dyn Error>> {
         let batch_init_duration = batch_init_start.elapsed().as_secs_f64() * 1000.0;
 
         let write_start = std::time::Instant::now();
-        // OLD CODE: Synthetic message
+        // MYCO VERSION: Synthetic message
         // let message = vec![1u8; MESSAGE_SIZE];
-        // NEW CODE: Real Enron message content (padded to MESSAGE_SIZE)
+        // simulation_client.async_write(&message, &client_name).await?;
+        
+        // ENRON VERSION: Real Enron message content (padded to MESSAGE_SIZE)
         let mut message = format!("Enron measurement message from {} at iteration {}", client_name, iteration).into_bytes();
         message.resize(MESSAGE_SIZE, 0); // Pad to MESSAGE_SIZE
-        simulation_client.async_write(&message, &client_name).await?;
+        // Send to first contact instead of self
+        let recipient = if contact_list.is_empty() { &client_name } else { &contact_list[0] };
+        simulation_client.async_write(&message, recipient).await?;
         simulation_client.s1.batch_write().await?;
         let write_duration = write_start.elapsed().as_secs_f64() * 1000.0;
 
