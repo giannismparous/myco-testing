@@ -22,8 +22,8 @@ path = "bin/rpc_server1_tput.rs"
 name = "rpc_server2_tput"
 path = "bin/rpc_server2_tput.rs"
 [[bin]]
-name = "matrix_simulation"
-path = "bin/matrix_simulation.rs"
+name = "rpc_multi_client"
+path = "bin/rpc_multi_client.rs"
 
 [dependencies]
 myco = { path = "../myco" }
