@@ -12,7 +12,6 @@ use std::error::Error;
 use tokio;
 use myco::utils::build_tls_channel;
 use tikv_jemallocator::Jemalloc;
-use std::collections::HashMap;
 use tokio::time::{sleep, Duration};
 
 #[global_allocator]
@@ -52,7 +51,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let max_contacts_per_user = Q;
     let max_epochs = (WARMUP_COUNT + LATENCY_BENCH_COUNT + 100).max(1000);  // Ensure we have enough epochs
     
-    let (enron_users, contacts_map, epoch_map) = enron_data::load_enron_subset(
+    let (enron_users, _contacts_map, epoch_map) = enron_data::load_enron_subset(
         users_csv_path,
         clean_csv_path,
         max_users,
@@ -168,7 +167,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 let recipient = if !contact_list.is_empty() {
                     &contact_list[0]
                 } else {
-                    &clients[(i + 1) % clients.len()].1  // Round-robin to next client
+                    // Round-robin to next client (avoid borrowing conflict)
+                    let next_client_idx = (i + 1) % num_clients;
+                    &running_clients[next_client_idx]
                 };
                 
                 client.async_write(&message, recipient).await?;
@@ -238,7 +239,9 @@ async fn main() -> Result<(), Box<dyn Error>> {
                 let recipient = if !contact_list.is_empty() {
                     &contact_list[0]
                 } else {
-                    &clients[(i + 1) % clients.len()].1  // Round-robin to next client
+                    // Round-robin to next client (avoid borrowing conflict)
+                    let next_client_idx = (i + 1) % num_clients;
+                    &running_clients[next_client_idx]
                 };
                 
                 client.async_write(&message, recipient).await?;
