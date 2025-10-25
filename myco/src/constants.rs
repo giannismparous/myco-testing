@@ -60,7 +60,8 @@ pub const TAG_SIZE: usize = 16;
 /// Number of epochs a message persists before expiring and being deleted.
 /// Set to 100 to ensure messages remain available long enough for clients 
 /// who may temporarily go offline.
-pub const DELTA: usize = 25;
+/// TESTING CODE: Reduced to 5 for testing on 187GB system with D=20
+pub const DELTA: usize = 5;
 
 /// Number of warmup iterations
 pub const WARMUP_COUNT: usize = DELTA;
@@ -69,7 +70,8 @@ pub const WARMUP_COUNT: usize = DELTA;
 /// With D=18, supports a database size of 2^18 = 262,144 messages.
 /// OLD CODE: pub const D: usize = 18;
 /// NEW CODE: Increased to 22 to support Enron dataset scale (2^22 = 4,194,304 messages)
-pub const D: usize = 22;
+/// TESTING CODE: Set to 20 for testing on 187GB system (2^20 = 1,048,576 messages)
+pub const D: usize = 20;
 
 /// Security parameter for cryptographic operations in bits.
 /// Standard 128-bit security level for keys and PRFs.
