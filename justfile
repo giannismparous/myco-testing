@@ -19,6 +19,9 @@ server1 addr="0.0.0.0:3002" server2_addr="https://localhost:3004":
 client server1_addr="http://localhost:3002" server2_addr="http://localhost:3004":
     cargo run --release --bin rpc_client {{server1_addr}} {{server2_addr}}
 
+multi-client server1_addr="https://localhost:3002" server2_addr="https://localhost:3004" num_clients="3":
+    cargo run --release --bin rpc_multi_client {{server1_addr}} {{server2_addr}} {{num_clients}}
+
 # Run components separately
 run-server2:
     cargo run --release --bin rpc_server2 127.0.0.1:3004
