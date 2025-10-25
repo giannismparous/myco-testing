@@ -50,8 +50,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 
     // NEW CODE: Enron data integration
     println!("Loading Enron data...");
-    let users_csv_path = "../sparta-model-evaluation-main/data/enron/users.csv";
-    let clean_csv_path = "../sparta-model-evaluation-main/data/enron/clean.csv";
+    let users_csv_path = "sparta-model-evaluation-main/data/enron/users.csv";
+    let clean_csv_path = "sparta-model-evaluation-main/data/enron/clean.csv";
     
     // Load a subset of Enron data for testing (adjust these parameters as needed)
     let max_users = 1000;  // Start with 1000 users instead of full 69k
