@@ -79,7 +79,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
     let key_list = (0..contact_list.len()).map(|_| Key::random(&mut rng)).collect::<Vec<_>>();
     
     println!("Setting up client '{}' with {} contacts", client_name, contact_list.len());
-    simulation_client.setup(key_list, contact_list)?;
+    simulation_client.setup(key_list, contact_list.clone())?;
 
     println!("\nStarting warm-up phase ({} iterations)...", WARMUP_COUNT);
     for iteration in 0..WARMUP_COUNT {
